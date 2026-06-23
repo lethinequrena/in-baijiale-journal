@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极速赛车 · 稳定入口与信息导览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f3f5f7;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e2b3a;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+
+        .page-wrapper {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* Hero 主视觉卡片 */
+        .hero-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f9fafc 100%);
+            border-radius: 32px;
+            padding: 3rem 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .hero-card:hover {
+            box-shadow: 0 12px 28px rgba(0, 20, 30, 0.06);
+        }
+
+        .hero-title {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0a1a2b;
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #3f536b;
+            max-width: 680px;
+            margin-bottom: 1.6rem;
+            border-left: 3px solid #9bb7d4;
+            padding-left: 1.2rem;
+            background: rgba(155, 183, 212, 0.06);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .hero-highlight {
+            display: inline-block;
+            background: #e5ecf3;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #1f405f;
+            border: 1px solid #d2dfed;
+            font-weight: 500;
+        }
+
+        /* 分区卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.8rem;
+        }
+
+        @media (min-width: 720px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eaeef3;
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 20, 30, 0.05);
+            border-color: #cad9e9;
+        }
+
+        .card-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #6b7f95;
+            background: #eef3f8;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            border: 1px solid #dce5ee;
+        }
+
+        .info-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.9rem;
+            color: #142b3e;
+        }
+
+        .info-card p {
+            color: #2c4055;
+            margin-bottom: 0.8rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            margin-top: 0.4rem;
+        }
+
+        .info-card li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.45rem;
+            color: #2c4055;
+        }
+
+        .info-card li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #6a8aa8;
+            font-weight: 600;
+        }
+
+        /* 自然链接段落 —— 嵌入卡片样式 */
+        .link-card {
+            grid-column: 1 / -1;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eaeef3;
+            transition: box-shadow 0.2s;
+        }
+
+        .link-card:hover {
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
+        }
+
+        .link-card p {
+            color: #1f3448;
+            margin-bottom: 0.75rem;
+        }
+
+        .link-card a {
+            color: #1a5a7f;
+            background: #eef5fc;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b6cfe2;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .link-card a:hover {
+            background: #d6e5f5;
+            border-bottom-color: #1a5a7f;
+        }
+
+        /* FAQ 摘要卡片 */
+        .faq-summary {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin-top: 0.8rem;
+            border: 1px solid #eaeef3;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
+        }
+
+        .faq-summary h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #142b3e;
+        }
+
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e8edf3;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #1e3a50;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .faq-a {
+            color: #3f536b;
+            font-size: 0.95rem;
+            padding-left: 0.2rem;
+        }
+
+        /* 页脚静默提示 */
+        .foot-note {
+            margin-top: 3rem;
+            padding: 1.2rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6e829a;
+            border-top: 1px solid #dce4ec;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #dce4ec;
+            margin: 1.8rem 0 1rem;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .link-card {
+                padding: 1.6rem 1.4rem;
+            }
+            .faq-summary {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- 主视觉 —— 稳定入口基调 -->
+    <div class="hero-card">
+        <div class="hero-title">极速赛车 · 信息导览</div>
+        <div class="hero-sub">从稳定入口开始，了解平台的结构与用途方向。本文档帮助新老用户快速定位功能区块与内容场景。</div>
+        <span class="hero-highlight">⚡ 持续维护 · 版本参考</span>
+    </div>
+
+    <!-- 信息卡片：用途 + 适合人群 -->
+    <div class="card-grid">
+
+        <!-- 用途卡片 -->
+        <div class="info-card">
+            <span class="card-label">用途方向</span>
+            <h3>场景与功能入口</h3>
+            <p>页面围绕赛事资讯、数据跟踪与社区互动三个主要板块展开。用户可通过统一入口获取实时赛况、历史记录以及技术解析。</p>
+            <ul>
+                <li>赛事日程与结果归档</li>
+                <li>图表化的性能对比</li>
+                <li>专题分析与短评</li>
+                <li>个人关注列表与提醒</li>
+            </ul>
+        </div>
+
+        <!-- 适合人群卡片 -->
+        <div class="info-card">
+            <span class="card-label">适合人群</span>
+            <h3>谁更适合使用</h3>
+            <p>以下三类使用者往往能从当前的信息结构中获益：</p>
+            <ul>
+                <li><strong>赛事关注者</strong> —— 需要快速浏览赛程与结果，不依赖第三方摘要。</li>
+                <li><strong>数据爱好者</strong> —— 希望查看结构化记录、分段数据与统计趋势。</li>
+                <li><strong>平台新用户</strong> —— 通过清晰的卡片分区，降低初次浏览的认知负担。</li>
+            </ul>
+        </div>
+
+        <!-- 自然链接段落卡片（跨列） -->
+        <div class="link-card">
+            <p>若希望直接访问主界面，可以在浏览器中键入 <a href="https://site-racing.com">极速赛车</a> 的地址。该入口长期稳定，页面结构以信息卡片和导航分区为主，适合在桌面或移动设备上阅读。</p>
+            <p>此外，多数功能页面均继承相同的视觉语言——浅灰背景、细边框与柔和阴影，帮助用户保持一致的浏览节奏。</p>
+            <p style="margin-top: 0.2rem; font-size: 0.9rem; color: #57708a;">▸ 提示：建议将链接添加至书签，以便日常快速返回。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="faq-summary">
+        <h3>常见疑问摘要</h3>
+
+        <div class="faq-item">
+            <div class="faq-q">页面是否经常调整结构？</div>
+            <div class="faq-a">主要卡片分区保持相对稳定，细节内容会随赛事周期与用户反馈迭代。每次更新会保留历史版本说明。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">移动端浏览体验如何？</div>
+            <div class="faq-a">采用响应式网格，卡片在窄屏下自动纵向排列，字体与间距均针对小屏幕做了适配，阅读无需频繁缩放。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">是否有独立的搜索或筛选功能？</div>
+            <div class="faq-a">当前页面以导览和摘要为主，搜索功能位于主界面顶部，支持赛事名称、日期范围等条件过滤。</div>
+        </div>
+        <div class="faq-item" style="border-bottom: none;">
+            <div class="faq-q">如何反馈问题或建议？</div>
+            <div class="faq-a">页面底部设有反馈入口（本演示页未包含），正式环境中可提交工单或发送邮件至支持邮箱。</div>
+        </div>
+    </div>
+
+    <!-- 静默分隔与脚注 -->
+    <hr>
+    <div class="foot-note">
+        本页为信息卡片式介绍 · 版本标识 · 内容定期复核
+    </div>
+
+</div>
+</body>
+</html>
